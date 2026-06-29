@@ -1,4 +1,4 @@
-import { use, useState } from "react";
+import { useState } from "react";
 import "./Apps.css";
 
 const tabsData = [
@@ -23,10 +23,7 @@ function App() {
   const [activeTab, setActiveTab] = useState(2);
   const [toggleTabs, setToggleTabs] = useState(true);
 
-  const changeTab = (id) => {
-    setActiveTab(id);
-  };
-
+  const currentTab = tabsData.find((tab) => tab.id === activeTab);
   return (
     <div>
       <div className="close-tab">
@@ -40,14 +37,14 @@ function App() {
             {tabsData.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => changeTab(tab.id)}
+                onClick={() => setActiveTab(tab.id)}
                 className={activeTab === tab.id ? "active" : ""}
               >
                 {tab.title}
               </button>
             ))}
           </div>
-          <div className="tab_desc">{tabsData[activeTab - 1].desc}</div>
+          <div className="tab_desc">{currentTab.desc}</div>
         </div>
       ) : (
         <p>Panel Closed</p>
